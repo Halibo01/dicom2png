@@ -1,4 +1,4 @@
-## Convert your dicom files into png files
+# Convert your dicom files into png files
 With easy to use interface and effortless DICOM to PNG conversion, our program streamlines the process ensuring a user-friendly experience for efficient medical image processing.
 Simplest usage:
 ```
@@ -7,7 +7,7 @@ Simplest usage:
 
 For resizing your images use `-R` or `--resize` command.
 
-# Example usage!
+### Example usage!
 ```
     python makepngcopy.py -W /user/dicomfolder -D /user/destinationfolder -R 512 512
 ```
@@ -17,7 +17,7 @@ Requires 2 arguments. X value and Y value
 </details>
 
 Decide bit format for your image with `-B` or `--bit` command.
-# Example usage!
+### Example usage!
 ```
     python makepngcopy.py -W /user/dicomfolder -D /user/destinationfolder -B 16
 ```
