@@ -7,7 +7,7 @@ Simplest usage:
 
 For resizing your images use `-R` or `--resize` command.
 <details>
-<summary>Example usage!<summary>
+<summary>Example usage!</summary>
 ```
     python makepngcopy.py -W /user/dicomfolder -D /user/destinationfolder -R 512 512
 ```
@@ -16,7 +16,7 @@ Note: Requires 2 arguments. X value and Y value
 
 Decide bit format for your image with `-B` or `--bit` command.
 <details>
-<summary>Example usage!<summary>
+<summary>Example usage!</summary>
 ```
     python makepngcopy.py -W /user/dicomfolder -D /user/destinationfolder -B 16
 ```
