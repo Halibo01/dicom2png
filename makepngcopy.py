@@ -40,7 +40,7 @@ def dir_scan(path:str) -> str:
             yield i.path
             yield from dir_scan(i.path)
 
-def trueorfalse(string):
+def trueorfalse(string) -> bool:
     if string.strip().lower() == "y" or string.strip().lower() == "yes" or string.strip().lower() == "ye":
         return True
     else:
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     
     parser = argparse.ArgumentParser()
     parser.add_argument("-W", "--workingdir", metavar="dir", required=True, type=str, default=None, help="Directory that you want to work with")
-    parser.add_argument("-D", "--destinationdir", metavar="dir", required=True, type=str, default=None, help="Destination that you want to copy all files")
+    parser.add_argument("-D", "--destinationdir", metavar="dir", required=False, type=str, default=None, help="Destination that you want to copy all files")
     parser.add_argument("-R", "--resize", metavar="x y", required=False, type=int, nargs=2, help="Resizing to desired size")
     parser.add_argument("-B", "--bit", type=int, default=24, help="Bit of the image. you can write 8, 16 or 24. 8 is 8 bit grayscale\n16 is 16 bit grayscale\n24 is 24 bit rgb image. Default: 24", choices=bitvalues)
     parser.add_argument("-y", action="store_true",help="Directly do the process without asking something")
@@ -73,6 +73,8 @@ if __name__ == '__main__':
     count = 0
     Y = args.y
     resizeit = False
+
+    
     if args.resize != None:
         resizeit = True
         shape = (args.resize[0], args.resize[1])
@@ -89,7 +91,9 @@ if __name__ == '__main__':
     elif os.listdir(workdir) == []:
         print("Folder that you want to work is empty. Abort")
         os._exit(2)
-    if (not os.path.exists(destdir) and os.path.exists(os.path.dirname(destdir))) and not Y:
+    if destdir == None:
+        pass
+    elif (not os.path.exists(destdir) and os.path.exists(os.path.dirname(destdir))) and not Y:
         print("Destination folder is not exists do you want to create a new file? [N/Y]: ", end="")
         q = input()
         if trueorfalse(q):
@@ -114,7 +118,10 @@ if __name__ == '__main__':
         for i in dir_scan(workdir):
             count += 1
         for i in tqdm(dir_scan(workdir), total=count):
-            dir = i.replace(workdir, destdir)
+            if destdir == None:
+                dir = destdir
+            else:
+                dir = i.replace(workdir, destdir)
             if os.path.isdir(i):
                 os.makedirs(dir, exist_ok=True)
             else:

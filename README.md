@@ -2,9 +2,14 @@
 With easy to use interface and effortless DICOM to PNG conversion, our program streamlines the process ensuring a user-friendly experience for efficient medical image processing.
 Simplest usage:
 ```
+    python makepngcopy.py -W /user/dicomfolder
+```
+WARNING: In this usage png files and dicom files will be in same location but it wont change the files, dont worry this usage is also safe.
+
+Seperate dicom files and png files from each other:
+```
     python makepngcopy.py -W /user/dicomfolder -D /user/destinationfolder
 ```
-
 For resizing your images use `-R` or `--resize` command.
 
 ### Example usage!
