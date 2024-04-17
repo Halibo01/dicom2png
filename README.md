@@ -24,6 +24,6 @@ Decide bit format for your image with `-B` or `--bit` command.
 <details>
 <summary>Note:</summary>
     Only 8 bit grayscale, 16 bit grayscale and 24 bit RGB is available.
-    Default bit format is **24 RGB**. 
+    Default bit format is 24 RGB. 
     Updates will be made to the application.
 </details>
