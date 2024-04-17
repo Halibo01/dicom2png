@@ -40,7 +40,8 @@ def dir_scan(path:str):
             yield i.path
             yield from dir_scan(i.path)
 
-def trueorfalse(string) -> bool:
+def trueorfalse() -> bool:
+    string = input()
     if string.strip().lower() == "y" or string.strip().lower() == "yes" or string.strip().lower() == "ye":
         return True
     else:
@@ -95,10 +96,8 @@ if __name__ == '__main__':
         pass
     elif (not os.path.exists(destdir) and os.path.exists(os.path.dirname(destdir))) and not Y:
         print("Destination folder is not exists do you want to create a new file? [N/Y]: ", end="")
-        q = input()
-        if trueorfalse(q):
+        if trueorfalse():
             destdir = createfile(destdir)
-            os.makedirs(destdir)
         else:
             os._exit(130)
     elif (not os.path.exists(destdir) and os.path.exists(os.path.dirname(destdir))) and Y:
@@ -106,8 +105,7 @@ if __name__ == '__main__':
         os.makedirs(destdir)
     elif os.listdir(destdir) != [] and not Y:
         print("Destination folder is not empty do you want to create another file for not to lose any data? [N/Y]: ", end="")
-        q = input()
-        if trueorfalse(q):
+        if trueorfalse():
             destdir = createfile(destdir)
         else:
             os._exit(130)
