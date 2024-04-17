@@ -12,7 +12,7 @@ warnings.filterwarnings("ignore")
 
 bitvalues = [8, 16, 24]
 
-def makepng2(image_dir, bit):
+def makepng2(image_dir, bit:int):
     n = np.uint8
     if bit == 16:
         n = np.uint16
@@ -32,7 +32,7 @@ def makepng2(image_dir, bit):
     return data
 
 
-def dir_scan(path:str) -> str:
+def dir_scan(path:str):
     for i in os.scandir(path):
         if i.is_file():
             yield i.path
@@ -117,21 +117,24 @@ if __name__ == '__main__':
     try:
         for i in dir_scan(workdir):
             count += 1
-        for i in tqdm(dir_scan(workdir), total=count):
+        for i in tqdm(dir_scan(workdir), total=count-1):
             if destdir == None:
-                dir = destdir
+                dir = i
             else:
                 dir = i.replace(workdir, destdir)
             if os.path.isdir(i):
                 os.makedirs(dir, exist_ok=True)
             else:
-                if i.endswith(".dicom"):
-                    dir = dir[:-5] + "png"
+                if i.endswith(".dicom") or i.endswith(".dcm"):
+                    fileformat = dir.split(".")[-1]
+                    dir = dir[:-len(fileformat)] + "png"
                     image = makepng2(i, bit)
                     if resizeit:
                         image = cv.resize(image, shape, interpolation=cv.INTER_AREA)
                     cv.imwrite(dir, image)
                 else:
+                    if destdir == None:
+                        continue
                     shutil.copy2(i, dir)
     except KeyboardInterrupt:
         print("Interrupted... Abort.")
