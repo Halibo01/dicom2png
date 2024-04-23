@@ -32,3 +32,4 @@ Decide bit format for your image with `-B` or `--bit` command.
     Default bit format is 24 RGB. 
     Updates will be made to the application.
 </details>
+made with python version 3.12
